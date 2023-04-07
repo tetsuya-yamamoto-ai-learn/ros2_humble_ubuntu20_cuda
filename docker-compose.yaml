@@ -1,0 +1,8 @@
+services:
+  ros-humble-ubuntu20:
+    image: ros-humble-ubuntu20
+    build: .
+    runtime: nvidia
+    volumes:
+      - ./:/home
+    working_dir: /home/ros2_ws
