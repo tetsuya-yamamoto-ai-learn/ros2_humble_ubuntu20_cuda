@@ -1,5 +1,9 @@
 FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
 
+# install sudo for cuda gui
+ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
+
 # setting locale
 RUN apt update && apt install locales
 RUN locale-gen en_US en_US.UTF-8
