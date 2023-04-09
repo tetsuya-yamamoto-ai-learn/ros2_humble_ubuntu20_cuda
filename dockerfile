@@ -53,9 +53,18 @@ RUN apt upgrade -y && \
     cd /opt/ros2_humble && \
     rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers"
 
+# get ros2 cvBridge code
+RUN apt install python3-numpy libboost-python-dev python3-opencv -y
+RUN cd /opt/ros2_humble/src && \
+    git clone https://github.com/ros-perception/vision_opencv.git
+
 # build the ros2 code
 RUN cd /opt/ros2_humble/ && \
     colcon build --symlink-install
 
 # setup ros2
 RUN echo "source /opt/ros2_humble/install/setup.bash" >> ~/.bashrc
+
+# for pcd
+RUN pip install open3d
+RUN pip install --upgrade numpy
